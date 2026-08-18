@@ -3,7 +3,7 @@ from PIL import Image, ImageTk
 import cv2
 import random
 import numpy as np
-import classes
+# import classes
 from tkinter import filedialog
 import sys, os
 
@@ -119,17 +119,21 @@ resultRefs=None
 photo_refs = None
 grayPic=None
 pinkPic=None
+picName="try"
 count=0
 countSuccess=0
 def start():
     global firstClick, mat, resultMat, resultRefs,screen
-    global countWidth,countHeight, currPic, grayPic,pinkPic
-    currPic = cv2.imread(resource_path(picName))
+    global countWidth,countHeight, currPic, grayPic,pinkPic , picName
+    print(currPic)
+    currPic = cv2.imread(resource_path(currPic))
+    print(currPic)
     screen = tk.Tk()
     screen.title("פאזל")
     screen.minsize(700,1000)
  
-    pil_img = Image.open(currPic).convert("RGB")
+    # pil_img = Image.open(currPic).convert("RGB")
+    pil_img = Image.fromarray(cv2.cvtColor(currPic, cv2.COLOR_BGR2RGB))
     img = np.array(pil_img)[:, :, ::-1]  # הופך מ-RGB ל-BGR בשביל OpenCV
     # img = cv2.imread(currPic)
     height, width = img.shape[:2]
